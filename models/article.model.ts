@@ -10,6 +10,7 @@ const articleSchema = new mongoose.Schema(
       default: false,
     },
     deletedAt: Date,
+    categoryId: String,
   },
   {
     timestamps: true,

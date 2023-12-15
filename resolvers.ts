@@ -112,6 +112,17 @@ export const resolvers = {
       return "Delete thành công";
     },
   },
+  Article: {
+    category: async (article) => {
+      const id = article.categoryId;
+      const category = await Category.findOne({
+        deleted: false,
+        _id: id,
+      });
+
+      return category;
+    },
+  },
 };
 // Resolvers na ná controller
 // typeDefs tương tự models
