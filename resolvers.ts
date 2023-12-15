@@ -50,6 +50,20 @@ export const resolvers = {
       });
       return record;
     },
+    deleteArticle: async (_, args) => {
+      const { id } = args;
+      await Article.updateOne(
+        {
+          _id: id,
+          deleted: false,
+        },
+        {
+          deleted: true,
+          deletedAt: new Date(),
+        }
+      );
+      return "Delete thành công";
+    },
   },
 };
 // Resolvers na ná controller
