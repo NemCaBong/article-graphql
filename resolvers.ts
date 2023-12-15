@@ -1,3 +1,5 @@
+import Article from "./models/article.model";
+
 /**
  * Func này return cái gì thì
  * biến hello bên typeDefs
@@ -8,6 +10,13 @@ export const resolvers = {
   Query: {
     hello: () => {
       return "Hello world";
+    },
+    getListArticle: async () => {
+      const articles = await Article.find({
+        deleted: false,
+      });
+
+      return articles;
     },
   },
 };
