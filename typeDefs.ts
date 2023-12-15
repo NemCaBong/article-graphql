@@ -17,5 +17,6 @@ export const typeDefs = gql`
   type Query {
     hello: String
     getListArticle: [Article]
+    getArticle(id: ID): Article
   }
 `;
