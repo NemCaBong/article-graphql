@@ -37,6 +37,19 @@ export const resolvers = {
       await record.save();
       return record;
     },
+    updateArticle: async (_, args) => {
+      const { id, article } = args;
+      await Article.updateOne(
+        {
+          _id: id,
+        },
+        article
+      );
+      const record = await Article.findOne({
+        _id: id,
+      });
+      return record;
+    },
   },
 };
 // Resolvers na ná controller
