@@ -1,4 +1,5 @@
 import Article from "./models/article.model";
+import Category from "./models/category.model";
 
 /**
  * Func này return cái gì thì
@@ -8,10 +9,6 @@ import Article from "./models/article.model";
  */
 export const resolvers = {
   Query: {
-    hello: () => {
-      return "Hello world";
-    },
-
     getListArticle: async () => {
       const articles = await Article.find({
         deleted: false,
@@ -28,6 +25,22 @@ export const resolvers = {
       });
 
       return article;
+    },
+    getListCategory: async () => {
+      const list = await Category.find({
+        deleted: false,
+      });
+
+      return list;
+    },
+    getCategory: async (_, args) => {
+      const { id } = args;
+      const category = await Category.findOne({
+        deleted: false,
+        _id: id,
+      });
+
+      return category;
     },
   },
   Mutation: {
@@ -53,6 +66,40 @@ export const resolvers = {
     deleteArticle: async (_, args) => {
       const { id } = args;
       await Article.updateOne(
+        {
+          _id: id,
+          deleted: false,
+        },
+        {
+          deleted: true,
+          deletedAt: new Date(),
+        }
+      );
+      return "Delete thành công";
+    },
+
+    createCategory: async (_, args) => {
+      const { category } = args;
+      const record = new Category(category);
+      await record.save();
+      return record;
+    },
+    updateCategory: async (_, args) => {
+      const { id, category } = args;
+      await Category.updateOne(
+        {
+          _id: id,
+        },
+        category
+      );
+      const record = await Category.findOne({
+        _id: id,
+      });
+      return record;
+    },
+    deleteCategory: async (_, args) => {
+      const { id } = args;
+      await Category.updateOne(
         {
           _id: id,
           deleted: false,
