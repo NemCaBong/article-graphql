@@ -11,6 +11,7 @@ export const resolversArticle = {
         currentPage,
         filterKey,
         filterValue,
+        keyword,
       } = args;
 
       const find = {
@@ -30,6 +31,14 @@ export const resolversArticle = {
         sort[sortKey] = sortValue;
       }
       // END SORT
+
+      // SEARCH
+      if (keyword) {
+        const keywordRegex: RegExp = new RegExp(keyword, "i");
+        // tìm kiếm theo tiêu đề
+        find["title"] = keywordRegex;
+      }
+      // END SEARCH
 
       // PAGINATION
       const skip = (currentPage - 1) * limitItems;

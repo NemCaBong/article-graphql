@@ -23,6 +23,7 @@ export const typeDefsArticle = gql`
       currentPage: Int = 1
       filterKey: String
       filterValue: String
+      keyword: String
     ): [Article]
     getArticle(id: ID): Article
   }
