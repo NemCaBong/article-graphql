@@ -94,7 +94,6 @@ export const resolversUser = {
           message: "Sai mật khẩu!",
         };
       }
-
       return {
         code: 200,
         message: "Thành công!",
