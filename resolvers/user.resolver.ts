@@ -1,8 +1,40 @@
 import md5 from "md5";
 import User from "../models/user.model";
 import { generateRandomString } from "../helpers/generate";
+import { info } from "console";
 
 export const resolversUser = {
+  Query: {
+    getUser: async (_, args) => {
+      try {
+        const { id } = args;
+        const infoUser = await User.findOne({
+          _id: id,
+          deleted: false,
+        });
+        if (infoUser) {
+          return {
+            code: 200,
+            message: "Thành công!",
+            id: infoUser.id,
+            fullName: infoUser.fullName,
+            email: infoUser.email,
+            token: infoUser.token,
+          };
+        } else {
+          return {
+            code: 400,
+            message: "Thất bại!!",
+          };
+        }
+      } catch (error) {
+        return {
+          code: 400,
+          message: "Thất bại " + error.message,
+        };
+      }
+    },
+  },
   Mutation: {
     registerUser: async (_, args) => {
       const { user } = args;
