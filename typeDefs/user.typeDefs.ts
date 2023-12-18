@@ -13,7 +13,7 @@ export const typeDefsUser = gql`
   }
 
   type Query {
-    getUser(id: ID): User
+    getUser: User
   }
 
   input RegisterUserInput {
