@@ -5,8 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "add-build": "git add dist"
   },
+  "pre-commit": [
+    "build",
+    "add-build"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -21,6 +27,7 @@
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.4",
     "nodemon": "^3.0.2",
+    "pre-commit": "^1.2.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
