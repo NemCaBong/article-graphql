@@ -1,6 +1,7 @@
 # Article API using GraphQL
 
 Sử dụng: NodeJS, ExpressJS, TypeScripts, GraphQL.
+
 Đường dẫn: article-graphql.vercel.app/graphql để query.
 
 Article:
